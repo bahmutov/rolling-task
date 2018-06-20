@@ -22,7 +22,10 @@ const { join } = require('path')
 const root = join(__dirname, '..', '..')
 
 function bundleRollup (file) {
-  // TODO use inline source maps
+  // TODO use inline source maps id:0
+  // Gleb Bahmutov
+  // gleb.bahmutov@gmail.com
+  // https://github.com/bahmutov/rolling-task/issues/1
   const inputOptions = {
     input: file,
     plugins: [
