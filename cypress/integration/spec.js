@@ -2,7 +2,7 @@
 
 beforeEach(() => {
   // filename from the root of the repo
-  cy.task('parcel', 'app.js').then(({ code }) => {
+  cy.task('roll', 'app.js').then(({ code }) => {
     const doc = cy.state('document')
     const script_tag = doc.createElement('script')
     script_tag.type = 'text/javascript'

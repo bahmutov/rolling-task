@@ -52,7 +52,7 @@ function bundleRollup (file) {
 
 module.exports = (on, config) => {
   on('task', {
-    parcel (filename) {
+    roll (filename) {
       filename = join(root, filename)
       console.log('file to bundle %s', filename)
 
