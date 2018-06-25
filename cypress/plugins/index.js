@@ -18,8 +18,8 @@ const buble = require('rollup-plugin-buble')
 const resolve = require('rollup-plugin-node-resolve')
 const { join } = require('path')
 
-// filenames should be from the repository root
-const root = join(__dirname, '..', '..')
+// filenames should be from the integration root
+const root = join(__dirname, '..', 'integration')
 
 function bundleRollup (file) {
   // TODO use inline source maps id:0

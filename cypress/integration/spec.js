@@ -2,7 +2,7 @@
 
 beforeEach(() => {
   // filename from the root of the repo
-  cy.task('roll', 'app.js').then(({ code }) => {
+  cy.task('roll', './text-app.js').then(({ code }) => {
     const doc = cy.state('document')
     const script_tag = doc.createElement('script')
     script_tag.type = 'text/javascript'
@@ -18,11 +18,14 @@ it('loads picostyle', () => {
     .should('be.equal', '64px')
 })
 
-it('uses smaller font on smaller screen', () => {
-  cy.viewport(200, 200)
-  cy.wait(100)
+const checkFont = size =>
   cy
     .contains('.p0', 'Picostyle')
     .invoke('css', 'fontSize')
-    .should('be.equal', '32px')
+    .should('be.equal', size)
+
+it('uses smaller font on smaller screen', () => {
+  cy.viewport(200, 200)
+  cy.wait(1000)
+  checkFont('32px')
 })

@@ -1,17 +1,9 @@
-// example Hyperapp using Picostyle
-
-import { app, h } from 'hyperapp'
+import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 
 const ps = picostyle(h)
 
-const state = {
-  text: 'Picostyle'
-}
-
-const actions = {}
-
-const view = state => {
+export const view = state => {
   const keyColor = '#f07'
 
   const Text = ps('span')({
@@ -44,5 +36,3 @@ const view = state => {
     </Wrapper>
   )
 }
-
-app(state, actions, view, document.body)
