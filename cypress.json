@@ -1,1 +1,3 @@
-{}
+{
+  "ignoreTestFiles": "text-app.js"
+}

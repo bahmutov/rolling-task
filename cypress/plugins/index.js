@@ -41,15 +41,9 @@ function bundleRollup (file) {
   // create a bundle
   return rollup.rollup(inputOptions).then(bundle => {
     const outputOptions = {
-      dir: 'dist',
-      file: 'out.js',
       format: 'iife'
     }
-    return bundle.generate(outputOptions).then(({ code, map }) => {
-      // or write the bundle to disk
-      // ? how to avoid writing to disk?
-      return bundle.write(outputOptions)
-    })
+    return bundle.generate(outputOptions)
   })
 }
 
