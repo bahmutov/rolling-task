@@ -37,7 +37,10 @@ function bundleRollup (file) {
 
   // create a bundle
   return rollup.rollup(inputOptions).then(bundle => {
-    // TODO avoid having to save to a file to get "nice" source inlined maps
+    // TODO avoid having to save to a file to get "nice" source inlined maps id:1
+    // Gleb Bahmutov
+    // gleb.bahmutov@gmail.com
+    // https://github.com/bahmutov/rolling-task/issues/6
     // bundle.generate() resolves with code and map and it should be enough
     // to find utility that can patch these two together.
     // For now use output file, read it back and send the source with source map
