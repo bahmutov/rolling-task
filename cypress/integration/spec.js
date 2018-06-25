@@ -2,7 +2,9 @@
 
 beforeEach(() => {
   // filename from the root of the repo
-  cy.task('roll', './text-app.js').then(({ code }) => {
+  cy.task('roll', './text-app.js').then(bundle => {
+    console.log('text app bundle', bundle)
+    const { code } = bundle
     const doc = cy.state('document')
     const script_tag = doc.createElement('script')
     script_tag.type = 'text/javascript'
@@ -11,7 +13,7 @@ beforeEach(() => {
   })
 })
 
-it('loads picostyle', () => {
+it.only('loads picostyle', () => {
   cy
     .contains('.p0', 'Picostyle')
     .invoke('css', 'fontSize')

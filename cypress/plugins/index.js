@@ -17,15 +17,12 @@ const postcss = require('rollup-plugin-postcss')
 const buble = require('rollup-plugin-buble')
 const resolve = require('rollup-plugin-node-resolve')
 const { join } = require('path')
+const fs = require('fs')
 
 // filenames should be from the integration root
 const root = join(__dirname, '..', 'integration')
 
 function bundleRollup (file) {
-  // TODO use inline source maps id:0
-  // Gleb Bahmutov
-  // gleb.bahmutov@gmail.com
-  // https://github.com/bahmutov/rolling-task/issues/1
   const inputOptions = {
     input: file,
     plugins: [
@@ -40,10 +37,22 @@ function bundleRollup (file) {
 
   // create a bundle
   return rollup.rollup(inputOptions).then(bundle => {
+    // TODO avoid having to save to a file to get "nice" source inlined maps
+    // bundle.generate() resolves with code and map and it should be enough
+    // to find utility that can patch these two together.
+    // For now use output file, read it back and send the source with source map
+    // back to the caller
     const outputOptions = {
-      format: 'iife'
+      format: 'iife',
+      sourcemap: 'inline',
+      dir: 'dist',
+      file: 'out.js'
     }
-    return bundle.generate(outputOptions)
+    return bundle.write(outputOptions).then(() => {
+      const outFile = join(outputOptions.dir, outputOptions.file)
+      const source = fs.readFileSync(outFile, 'utf8')
+      return { code: source }
+    })
   })
 }
 
